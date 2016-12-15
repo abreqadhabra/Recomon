@@ -56,7 +56,7 @@ public class ALSExample {
     }
 
     // Build the recommendation model using ALS on the training data
-    ALS als = new ALS().setMaxIter(5).setRegParam(0.01).setUserCol("ID").setUserCol("user")
+    ALS als = new ALS().setMaxIter(5).setRegParam(0.01).setUserCol("user")
                        .setItemCol("movie").setRatingCol("rating");
     ALSModel model = als.fit(training);
 
