@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>[%-5level][%d{yyyy-MM-dd HH:mm:ss.SSS}] %class - %msg%n</Pattern>
+        </layout>
+    </appender>
+
+    <root level="warn">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="com.abreqadhabra" level="trace"
+            additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.apache.spark.memory.TaskMemoryManager" level="warn"/>
+</configuration>

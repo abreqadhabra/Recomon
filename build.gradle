@@ -1,0 +1,27 @@
+apply plugin: 'java'
+apply plugin: 'scala'
+apply plugin: 'idea'
+apply plugin: 'application'
+
+project.ext {
+    scalaBinaryVersion = '2.11'
+    scalaVersion = '2.10.6'
+    sparkVersion = '2.0.2'
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+dependencies {
+    compile("org.apache.spark:spark-core_${scalaBinaryVersion}:${sparkVersion}")
+    compile("org.apache.spark:spark-sql_${scalaBinaryVersion}:${sparkVersion}")
+    compile "org.apache.spark:spark-mllib_${scalaBinaryVersion}:${sparkVersion}"
+
+    compile 'ch.qos.logback:logback-classic:1.1.3'
+    compile "org.slf4j:log4j-over-slf4j:1.7.13"
+}
+
