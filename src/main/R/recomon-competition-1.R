@@ -1,16 +1,21 @@
-print(Sys.setenv(RSW_HOME = "C:/recomon"))
-rswHome <- Sys.getenv("RSW_HOME")
-
-getwd()
-wd <- file.path("C:/recomon", "data", fsep = .Platform$file.sep)
+wd <- file.path("C:/Recomon", "data", fsep = .Platform$file.sep)
 setwd(wd)
+getwd()
 
 if (!require(data.table)) {
   install.packages("data.table")
   library(data.table)
 }
 
-training <-
+if (!require(recommenderlab)) {
+  install.packages("recommenderlab")
+  library(recommenderlab)
+  packageVersion("recommenderlab")
+}
+#> packageVersion("recommenderlab")
+#[1] ‘0.2.1’
+
+train.dt <-
   fread(
     "train_recomon.csv",
     na.strings = "NA",
@@ -20,50 +25,70 @@ training <-
     showProgress = TRUE
   )
 
-training
-str(training)
-nrow(training)
+train.dt
+str(train.dt)
+nrow(train.dt)
 
-test <-
+memory.size()
+memory.limit()
+memory.size(T)
+
+(training.dt <- train.dt[, c("user", "movie", "rating"), with = FALSE])
+(training.rrm <- as(training.dt, "realRatingMatrix"))
+
+head(as(training.rrm, "data.frame"))
+nrow(as(training.rrm, "data.frame"))
+
+recommenderRegistry$get_entries(dataType = "realRatingMatrix")
+
+recommend_model <-
+  Recommender(
+    trainingSetRRM,
+    # method = "ALS" #0.88460
+    method = "POPULAR" #0.93577
+    # method = "SVD" #0.99534
+    # method = "IBCF" #1.58986
+    # method = "UBCF" #1.00384
+  )
+
+print(recommend_model)
+names(getModel(recommend_model))
+
+predicted <- predict(recommend_model, trainingSetRRM, type = "ratings")
+str(predicted)
+
+(predicted.dt <- as.data.table(as(predicted , "data.frame")))
+
+test.dt <-
   fread(
     "test_recomon.csv",
     na.strings = "NA",
+    colClasses = c(ID = "character", user = "character", movie = "character"),
     verbose = TRUE,
     encoding = 'UTF-8',
     strip.white = TRUE,
     showProgress = TRUE
   )
 
-test
-str(test)
-nrow(test)
+test_predicted.dt <- merge(
+  x = test.dt,
+  y = predicted.dt,
+  by.x = c("user", "movie"),
+  by.y = c("user", "item"),
+  all.x = TRUE
+)
 
-ratings <-
-  fread(
-    "ratings.csv",
-    na.strings = "NA",
-    verbose = TRUE,
-    encoding = 'UTF-8',
-    strip.white = TRUE,
-    showProgress = TRUE
-  )
+(submission_recomon <- test_predicted.dt[, c("ID", "rating"), with = FALSE])
 
-ratings
-str(ratings)
-nrow(ratings)
+setDT(submission_recomon)[rating <= 0, rating := 0.01]
+setDT(submission_recomon)[is.na(rating), rating := 0.01]
 
-test[movie==48 & user==1]
-ratings[movieId==1 & userId==48]
+nrow(submission_recomon)
 
-training[movie==3784 & user==3704]
-ratings[movieId==3784 & userId==3704]
-ratings[movieId==3704 & userId==3784]
-
-setkeyv(ratings,c("userId","movieId"))
-setkeyv(test,c("movie","user"))
-
-test1 <- ratings[test, nomatch=0]
-
-test1
-str(test1)
-nrow(test1)
+write.table(
+  submission_recomon,
+  "result/sample_submission_recomon.csv",
+  sep = ",",
+  row.names = FALSE,
+  col.names = TRUE
+)

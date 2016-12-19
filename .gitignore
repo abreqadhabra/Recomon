@@ -9,4 +9,4 @@
 /data/ratings.csv
 /data/result/_SUCCESS
 /data/result/*.crc
-
+/data/.RDataTmp
