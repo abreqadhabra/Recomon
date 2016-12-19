@@ -43,7 +43,7 @@ recommenderRegistry$get_entries(dataType = "realRatingMatrix")
 
 recommend_model <-
   Recommender(
-    trainingSetRRM,
+    training.rrm,
     # method = "ALS" #0.88460
     method = "POPULAR" #0.93577
     # method = "SVD" #0.99534
@@ -54,7 +54,7 @@ recommend_model <-
 print(recommend_model)
 names(getModel(recommend_model))
 
-predicted <- predict(recommend_model, trainingSetRRM, type = "ratings")
+predicted <- predict(recommend_model, training.rrm, type = "ratings")
 str(predicted)
 
 (predicted.dt <- as.data.table(as(predicted , "data.frame")))
