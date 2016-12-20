@@ -85,10 +85,8 @@ setDT(submission_recomon)[is.na(rating), rating := 0.01]
 
 nrow(submission_recomon)
 
-write.table(
+write.csv(
   submission_recomon,
   "result/sample_submission_recomon.csv",
-  sep = ",",
-  row.names = FALSE,
-  col.names = TRUE
+  row.names = FALSE
 )
