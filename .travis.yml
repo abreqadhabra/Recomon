@@ -5,7 +5,7 @@ before_install:
 - chmod +x gradlew
 before_deploy:
 - pwd
-- ll
+- find . -name "*.jar" -print
 - ls
 deploy:
   provider: releases
