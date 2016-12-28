@@ -2,4 +2,4 @@
 http://www.modulabs.co.kr/Recomon_Free
 
 # Travis CI 
-https://travis-ci.org/abreqadhabra/Recomon
+[<img src="https://api.travis-ci.org/abreqadhabra/Recomon.png">](https://travis-ci.org/abreqadhabra/Recomon)
