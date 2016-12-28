@@ -5,6 +5,7 @@ before_install:
 - chmod +x gradlew
 before_deploy:
 pwd
+ll
 deploy:
   provider: releases
   api_key:
