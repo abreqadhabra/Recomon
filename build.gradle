@@ -4,6 +4,8 @@ apply plugin: 'idea'
 //apply plugin: 'application'
 //mainClassName = 'com.something.MyMainClass'
 
+version "0.2"
+
 project.ext {
     scalaBinaryVersion = '2.11'
     scalaVersion = '2.10.6'
