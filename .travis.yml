@@ -6,7 +6,7 @@ before_install:
 before_deploy:
 - pwd
 - find . -name "*.jar" -print
-- ls build/libs
+- ls build/libs/Recomon*.jar
 deploy:
   provider: releases
   api_key:
