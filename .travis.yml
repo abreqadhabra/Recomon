@@ -4,8 +4,9 @@ jdk:
 before_install:
 - chmod +x gradlew
 before_deploy:
-pwd
-ll
+- pwd
+- ll
+- ls
 deploy:
   provider: releases
   api_key:
