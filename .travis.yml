@@ -1,5 +1,12 @@
 language: java
 jdk:
-  - oraclejdk8
+- oraclejdk8
 before_install:
- - chmod +x gradlew
+- chmod +x gradlew
+deploy:
+  provider: releases
+  api_key:
+    secure: sAF0nhwtCw9PSmHsTSsyLZLVLmyIjyrApZvfAXP4UNVsDdLoIa2j1x6zjtqCxMEleZ56k31gwxGBI5nEYg/lCcUC12aLi1Pu5FA++H3v3//ba1y8vq+FXw7dsW7XewFRLBmnxKwqigW0x2wyOQyibCK4tToecTSsYiFn73+/imntDzw42TTyRZLxQrBfbwPePZjpcxtBinYAZJaK6hWaYdWX9WFfuIUlNSb68eidBgeC0cfEKeWnay+yQA7nJmlKo6NfWcTi9dS48VRUVrLvRnCI2EjqRkqoBSmgZdVkGajLxby1sLP5nmaAqmVhs1H8Rjv7sg2pR/HmpCBw9nJGVE0+NEYneClmtO+YW7tkHVLx40JGe9ldUMN0BLZC9Gzzmf+ioQZ6Bac7felbmOTHlEvwDH84lSW0TqnT67ghbUPZ7wGxMr3Seg+MOmjczMz7WhXb3bgFlXATWa3JvLZ2YhXAA2fp3KKVFeKtmHNekP96r5GMx5zhJ8WB2+nd3cU+M/5gLQkQ8ctRh+9W74IMk5QNx3/HbZVM2qxfJQe7V2445qj/IV+1oWXi8m+aqQLTYs/Kk3WnJ+/RctmXCI7Ec6uBhWcn7wsCKbY39eJut6N2hoFPPA2kP6Swa7ZfiW44QXlJ07WDM3nbYplWCYf5UeczWG+OgQaLTHrwmCYdK3g=
+  file: build/libs/Recomon.jar
+  on:
+    repo: abreqadhabra/Recomon
