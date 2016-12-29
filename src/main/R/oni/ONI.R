@@ -9,7 +9,7 @@ if (!require(data.table)) {
 
 data.dt <-
   fread(
-    "oni/recomon_data_1.csv",
+    "oni/recomon_data_2.csv",
     na.strings = "NA",
     verbose = TRUE,
     encoding = 'UTF-8',
@@ -19,13 +19,14 @@ data.dt <-
 
 str(data.dt)
 
-training.dt <- data.dt[, list(count = .N), by = list(student_user_No, 개념값 )]
+training.dt <-
+  data.dt[, list(count = .N), by = list(student_user_No, paste(개념,  중단원, 소단원, sep =
+                                                                   "|"))]
 
 nrow(training.dt)
 
 training.dt[order(rank(student_user_No))] 
 
-student_no <- 26405
 
 if (!require(recommenderlab)) {
   install.packages("recommenderlab")
@@ -97,5 +98,5 @@ top5
 #$`726`
 #[1] "2133" "1168" "39"   "707"  "708" 
 
-data.dt[개념값 %in% unlist(top5)][, list(count = .N), by = list(개념값)]
+#data.dt[개념값 %in% unlist(top5)][, list(count = .N), by = list(개념값)]
 
