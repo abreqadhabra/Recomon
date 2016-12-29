@@ -4,7 +4,7 @@ sudo: required
 addons:
   sonarqube:
     token:
-      secure: "23cab216471e6649b180e76597ddcae7111f7dbd"
+      secure: ""
 cache:
   directories:
     - '$HOME/.sonar/cache'
