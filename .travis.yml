@@ -11,6 +11,9 @@ addons:
     packages:
       - oracle-java9-installer
 
+before_install:
+ - chmod +x gradlew
+
 install:
 - java -version
 - export GRADLE_OPTS="--add-opens java.base/java.lang=ALL-UNNAMED -Dorg.gradle.daemon=false"
