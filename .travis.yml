@@ -22,7 +22,7 @@ install:
 - ./gradlew -version
 - wget http://repo1.maven.org/maven2/org/codehaus/groovy/groovy-all/2.4.10/groovy-all-2.4.10.jar
 # - rm /home/travis/.gradle/wrapper/dists/gradle-3.4.1-bin/71zneekfcxxu7l9p7nr2sc65s/gradle-3.4.1/lib/groovy-all-2.4.7.jar
-- cp groovy-all-2.4.10.jar /home/travis/.gradle/wrapper/dists/gradle-3.4.1-bin/71zneekfcxxu7l9p7nr2sc65s/gradle-3.4.1/lib/groovy-all-2.4.7.jar
+# - cp groovy-all-2.4.10.jar /home/travis/.gradle/wrapper/dists/gradle-3.4.1-bin/71zneekfcxxu7l9p7nr2sc65s/gradle-3.4.1/lib/groovy-all-2.4.7.jar
 
 script:
 - ./gradlew --no-daemon --info --stacktrace check
